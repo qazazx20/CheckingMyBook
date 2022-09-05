@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmd.mappers.userMapper">
+   
+	<!-- 카테고리 호출 -->
+		<select id="category" resultType="com.cmd.domain.CategoryVO">
+ 			select
+  				level, cateName, cateCode, cateCodeRef
+ 			from book_category
+    	 		start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+		</select>
+
+	<!-- Add -->
+		<insert id="register">
+ 			insert into cmd_book (bkNum, bkName, bkAuthor, cateCode, bkDes,
+ 								  bkImg, bkThumbImg)
+     			values (cmd_book_seq.nextval, #{bkName}, #{bkAuthor}, #{cateCode}, #{bkDes},
+     					#{bkImg}, #{bkThumbImg})
+		</insert>
+		
+	 <!-- List -->
+		<!-- <select id="booklist" resultType="com.cmd.domain.BookVO">
+		select 
+			bkNum, bkName, bkAuthor, cateCode, bkDes, bkImg, bkDate
+		from cmd_book
+			order by bkNum asc
+		</select> --> 
+		
+	<!-- List(카테고리 이름) -->
+		<select id="booklist" resultType="com.cmd.domain.BookViewVO">
+		select
+			b.bkNum, b.bkName, b.bkAuthor, c.cateCode, c.cateName, bkDes, bkImg, bkDate,
+			b.bkImg, b.bkThumbImg
+				from cmd_book b
+					inner join book_category c
+						on b.cateCode = c.cateCode
+		</select>
+	
+		
+    <!-- 조회 -->
+	<!-- <select id="bookView" resultType="com.cmd.domain.BookVO">
+		select 
+			bkNum, bkName, bkAuthor, cateCode, bkDes, bkImg, bkDate
+		from cmd_book
+			where bkNum = #{bkNum}
+	</select> -->
+	
+		<!-- 조회 + 카테고리 조인 -->
+	<select id="bookView" resultType="com.cmd.domain.BookViewVO">
+		select
+			b.bkNum, b.bkName, b.bkAuthor, c.cateCode, c.cateName, bkDes, bkImg, bkDate,
+			b.bkImg, b.bkThumbImg
+				from cmd_book b
+					inner join book_category c
+						on b.cateCode = c.cateCode
+				where b.bkNum=#{bkNum}
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id = "bookModify">
+		update cmd_book
+			set
+         		bkName = #{bkName},
+         		cateCode = #{cateCode},
+         		bkAuthor = #{bkAuthor},
+         		bkDes = #{bkDes},
+         		
+         		bkImg = #{bkImg},
+         		
+         		bkThumbImg = #{bkThumbImg}
+     		where bkNum = ${bkNum}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id = "bookDelete">
+		delete
+			cmd_book
+		where bkNum = #{bkNum}
+	</delete>
+	
+	<!-- 카테고리 대분류 -->
+	<select id="mainlist_1" resultType="com.cmd.domain.BookViewVO">
+	select
+		b.bkNum, b.bkName, b.bkAuthor, c.cateCode, c.cateName, bkDes,
+		bkImg, bkDate, b.bkImg, b.bkThumbImg
+			from cmd_book b
+		inner join book_category c
+			on b.cateCode = c.cateCode
+		where b.cateCode = #{cateCode} or c.cateCodeRef = #{cateCodeRef}
+	</select>	
+		
+	<!-- 카테고리 중분류 -->
+	<select id="mainlist_2" resultType="com.cmd.domain.BookViewVO">
+	select
+		b.bkNum, b.bkName, b.bkAuthor, c.cateCode, c.cateName, bkDes,
+		bkImg, bkDate, b.bkImg, b.bkThumbImg
+			from cmd_book b
+		inner join book_category c
+			on b.cateCode = c.cateCode
+		where b.cateCode = #{cateCode}	
+	</select>
+</mapper>
