@@ -11,7 +11,7 @@ public interface UserService {
 	// 카테고리
 	public List<CategoryVO> category() throws Exception;
 	
-	// Add
+	// register
 	public void register(BookVO vo) throws Exception;
 	
 	// List
@@ -28,4 +28,5 @@ public interface UserService {
 
 	// 카테고리별 리스트
 	public List<BookViewVO> list(int cateCode, int level) throws Exception;
-	}
+	
+}

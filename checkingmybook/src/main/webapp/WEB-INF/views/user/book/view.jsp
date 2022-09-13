@@ -12,7 +12,7 @@
 
 <style>
 	
-	html, body {
+html, body {
 	height: 100%
 }
 
@@ -114,8 +114,12 @@ footer#footer ul li {
 </style>
 
 <style>
+form {
+	margin: 30px;
+}
+
 .inputArea {
-	margin: 10px 0;
+	margin: 20px 0;
 }
 
 select {
@@ -128,23 +132,15 @@ label {
 	padding: 5px;
 }
 
-label[for='bkDes'] {
-	display: block;
-}
-
 input {
 	width: 150px;
 }
 
-textarea#bkDes {
-	width: 400px;
-	height: 180px;
+.oriImg {
+	width: 500px;
+	height: auto;
 }
 
-.oriImg{ width:500px; height: auto;}
-.thumbImg {}
-
-.bkDes img { max-width: 600px; height: auto;}
 </style>
 
 </head>
@@ -169,59 +165,53 @@ textarea#bkDes {
 			<div id="container_box">
 
 				<td>
-					<h1>${books.bkName}</h1>
+					<h1 style = "margin: 30px;">${books.bkName}</h1>
 				</td>
 
 				<form role="form" method="post" autocomplete="off">
 
 					<input type="hidden" name="n" value="${books.bkNum}" />
 
-					<div class="inputArea">
-						<label>대분류</label> <span class="category1">> ${books.cateName}</span> 
-						<label>중분류</label> <span class="category2">> ${books.cateName}</span>
+					<div class="cate">
+						<span class="category1"> 
+						<label style=width:80px;> 카테고리 </label>
+						 > ${books.cateName}</span>
 					</div>
 
 
-					<div class="inputArea">
-						<label for="bkImg">이미지</label>
-						<img src="${books.bkThumbImg}" class="thumbImg" />
+					<div class="title" style = "width: 300px;">
+						<label>표지</label>
+						<img src="${books.bkImg}" class="thumbImg" />
+					</div>
+					
+					<div class="bkAuthor">
+						<label>작가</label> 
+						<span>${books.bkAuthor}</span>
+					</div>
+					
+					<div class="bkDes">
+						<label>후기</label> 	
+						<span>${books.bkDes}</span>
 					</div>
 					
 					<div class="inputArea">
-						<label for="bkName">제목</label> <span>${books.bkName}</span>
-					</div>
-
-					<div class="inputArea">
-						<label for="bkAuthor">작가</label> <span>${books.bkAuthor}</span>
-					</div>
-
-					<div class="inputArea">
-						<label for="bkDes">후기</label> 
+						<button type="button" id="modify_Bt">수정</button>
+						<button type="button" id="delete_Bt">삭제</button>
 						
-						<!-- <span>${books.bkDes}</span> -->
-						<div class="bkDes">${book.bkDes}</div>
-					</div>
-
-					<div class="inputArea">
-						<button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
-						<button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
 						<script>
 							var formObj = $("form[role='form']");
-
-							$("#modify_Btn").click(function() {
+							
+							$("#modify_Bt").click(function() {
 								formObj.attr("action", "/user/book/modify");
 								formObj.attr("method", "get")
 								formObj.submit();
 							});
 
-							$("#delete_Btn").click(
+							$("#delete_Bt").click(
 									function() {
-
 										var con = confirm("정말로 삭제하시겠습니까?")
-
 										if (con) {
-											formObj.attr("action",
-													"/user/book/delete");
+											formObj.attr("action", "/user/book/delete");
 											formObj.submit();
 										}
 									});

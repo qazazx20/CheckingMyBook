@@ -113,7 +113,6 @@ footer#footer ul li {
 }
 </style>
 
-
 <style>
 #container_box table{
 	width: 90%;
@@ -158,7 +157,7 @@ footer#footer ul li {
 				<table>
 					<thead>
 						<tr>
-							<th>사진</th>
+							<th>표지</th>
 							<th>번호</th>
 							<th>제목</th>
 							<th>작가</th>

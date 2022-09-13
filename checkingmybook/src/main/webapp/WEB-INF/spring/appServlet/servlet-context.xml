@@ -32,7 +32,7 @@
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg
-			value="C:\Spring\Spring_Shop\Shop\checkingmybook\src\main\webapp\resources" />
+			value="C:\Spring\Spring_Shop\Shop\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\checkingmybook\resources" />
 	</beans:bean>
 
 	<!-- 일반 파일 업로드 경로 -->

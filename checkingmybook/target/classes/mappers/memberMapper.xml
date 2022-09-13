@@ -6,7 +6,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="signup">
-		insert into cmd_member(userId, userPass, userName, userPhon)
+		insert into 
+			cmd_member(userId, userPass, userName, userPhon)
 		values(#{userId}, #{userPass}, #{userName}, #{userPhon})
 	</insert>
    

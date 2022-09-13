@@ -4,10 +4,10 @@
  */
 	CKEDITOR.editorConfig = function( config ) {
 	
-	//config.filebrowserUploadUrl      = '/user/book/ckUpload',
-	//config.filebrowserImageUploadUrl = '/user/',
+	config.filebrowserUploadUrl      = '/user/book/ckUpload',
+	config.filebrowserImageUploadUrl = '/user/',
 	
-	//config.filebrowserUploadMethod = 'form';
+	config.filebrowserUploadMethod = 'form';
 	
 	// Define changes to default configuration here.
 	// For complete reference see:

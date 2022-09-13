@@ -12,7 +12,7 @@
     	 		start with cateCodeRef is null connect by prior cateCode = cateCodeRef
 		</select>
 
-	<!-- Add -->
+	<!-- 등록 -->
 		<insert id="register">
  			insert into cmd_book (bkNum, bkName, bkAuthor, cateCode, bkDes,
  								  bkImg, bkThumbImg)
@@ -21,12 +21,12 @@
 		</insert>
 		
 	 <!-- List -->
-		<!-- <select id="booklist" resultType="com.cmd.domain.BookVO">
+		<!--  <select id="booklist" resultType="com.cmd.domain.BookVO">
 		select 
 			bkNum, bkName, bkAuthor, cateCode, bkDes, bkImg, bkDate
 		from cmd_book
 			order by bkNum asc
-		</select> --> 
+		</select> -->
 		
 	<!-- List(카테고리 이름) -->
 		<select id="booklist" resultType="com.cmd.domain.BookViewVO">

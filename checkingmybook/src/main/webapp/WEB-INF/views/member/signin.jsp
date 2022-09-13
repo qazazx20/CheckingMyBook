@@ -110,20 +110,22 @@ footer#footer ul li {
 					<form role="form" method="post" autocomplete="off">
 						<div class="input_area">
 							<label for="userId"><p>Email<p></label> 
-							<input type="email" id="userId" name="userId" required="required" value="qq@qq.q" />
+							<input type="email" id="userId" name="userId" placeholder="이메일을 입력해 주세요"
+								required="required" />
 						</div>
 
 						<div class="input_area">
 							<label for="userPass"><p>Password<p></label> 
-							<input type="password" id="userPass" name="userPass" required="required" value="1234" />
+							<input type="password" id="userPass" name="userPass"/>
 						</div>
 
 						<button type="submit" id="signin_btn" name="signin_btn">Login</button>
 
-						<!-- 비밀번호 틀릴 시 -->
+						<!-- 로그인 정보 틀릴 시 -->
 						<c:if test="${msg == false}">
-							<p style="color: #f00;">로그인에 실패했습니다.</p>
+							<p style="color: #f00;">아이디 혹은 비밀번호를 확인해 주세요.</p>
 						</c:if>
+						
 
 					</form>
 				</section>

@@ -9,8 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cmd.domain.MemberVO;
@@ -26,54 +27,49 @@ public class MemberController {
 	MemberService service;
 
 	@Autowired
-	BCryptPasswordEncoder passEncoder; // 암호화
+	BCryptPasswordEncoder passEncoder;
 	  
 	// 회원가입 get
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@GetMapping("/signup")
 	public void getSignup() throws Exception {
 	 logger.info("get signup");
 	}
 
 	// 회원가입 post
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping("/signup")
 	public String postSignup(MemberVO vo) throws Exception {
 	 logger.info("post signup");
 	  
-	 String inputPass = vo.getUserPass();
-	 String pass = passEncoder.encode(inputPass);
-	 vo.setUserPass(pass);
+	 String input = vo.getUserPass();
+	 String pwd = passEncoder.encode(input);
+	 vo.setUserPass(pwd);
 
 	 service.signup(vo);
 
-	 // 회원가입 시 입력하는 MemberVO에서, 패스워드(getUserPass)만 받아와서 
-	 // encode로 암호화한뒤, 다시 패스워드(setUserPass)에 넣어줍니다.
 	 return "redirect:/";
 	}
 	
-	// 로그인  get
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	// 로그인 get
+	@GetMapping("/signin")
 	public void getSignin() throws Exception {
 	 logger.info("get signin");
 	}
 
 	// 로그인 post
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public String postSignin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
+	@PostMapping("/signin")
+	public String postSignin(MemberVO vo, HttpServletRequest request, RedirectAttributes redirect) throws Exception {
 	 logger.info("post signin");
 	   
 	 MemberVO login = service.signin(vo);  
-	 HttpSession session = req.getSession();
+	 HttpSession session = request.getSession();
 	 
-	 boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
+	  boolean pwdMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
 	 
-	 // passMatch: 사용자가 입력한 패스워드와 DB에 저장된 패스워드 비교 후
-	 // 동일하면 T, 불일치하면 F 반환
-	 
-	 if(login != null && passMatch) {
-	  session.setAttribute("member", login);
+	 if(login != null && pwdMatch) {
+		 session.setAttribute("member", login);
 	 } else {
-	  session.setAttribute("member", null); // 세션값 제거
-	  rttr.addFlashAttribute("msg", false); // false 값 부여
+		 session.setAttribute("member", null);
+		 redirect.addFlashAttribute("msg", false);
 	  return "redirect:/member/signin";
 	 }  	 
 	  return "redirect:/";
@@ -81,11 +77,12 @@ public class MemberController {
 	  
 	
 	// 로그아웃
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public String signout(HttpSession session) throws Exception {
+	@GetMapping("/signout")
+	public String signout(HttpServletRequest request) throws Exception {
 		logger.info("get logout");
 		
-		service.signout(session);
+		HttpSession session = request.getSession();
+		session.invalidate();
 		
 		return "redirect:/";
 	}

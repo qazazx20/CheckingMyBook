@@ -39,14 +39,36 @@
 </style>
 
 <style>
-.inputArea { margin:10px 0; }
-select { width:100px; }
-label { display:inline-block; width:70px; padding:5px; }
-label[for='bkDes'] { display:block; }
-input { width:150px; }
-textarea#bkDes { width:400px; height:180px; }
+.inputArea {
+	margin: 10px 0;
+}
 
-.select_img img {width: 500px; margin: 20px 0;}
+select {
+	width: 100px;
+}
+
+label {
+	display: inline-block;
+	width: 70px;
+	padding: 5px;
+}
+
+label[for='bkDes'] {
+	display: block;
+}
+
+input {
+	width: 150px;
+}
+
+textarea#bkDes {
+	width: 400px;
+	height: 180px;
+}
+
+.select_img img {
+	margin: 20px 0;
+}
 </style>
 
 </head>
@@ -98,8 +120,7 @@ textarea#bkDes { width:400px; height:180px; }
 						<textarea rows="5" cols="50" id="bkDes" name="bkDes"
 							value="${books.bkDes}"></textarea>
 
-						<script>
-
+						<!-- <script>
 							var ckeditor_config = {
 								resize_enaleb : false,
 								enterMode : CKEDITOR.ENTER_BR,
@@ -108,35 +129,35 @@ textarea#bkDes { width:400px; height:180px; }
 							};
 
 							CKEDITOR.replace("bkDes", ckeditor_config);
-						</script>
+						</script> -->
 
 					</div>
 
-					<div class = "inputArea">
-	<label for="cmdImg">이미지</label>
-	<input type="file" id="bkImg" name="file" />
-	<div class="select_img">
-	<img src="${books.bkImg}" />
-	<input type="hidden" name="bkImg" value="${books.bkImg}" />
-	<input type="hidden" name="bkThumbImg" value="${books.bkThumbImg}" />
-	</div>
-	
-	<script>
-		$("#bkImg").change(function(){
-			if(this.files && this.files[0]){
-				var reader = new FileReader;
-				reader.onload = function(data) {
-					$(".select_img img").attr("src", data.target.result).width(200);
-				}
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-	</script>
-	
-	<%= request.getRealPath("/") %>
-	
-</div>
-					
+					<div class="inputArea">
+						<label for="cmdImg">이미지</label> <input type="file" id="bkImg"
+							name="file" />
+						<div class="select_img">
+							<img src="${books.bkImg}" /> 
+							<input type="hidden" name="bkImg"value="${books.bkImg}" /> 
+							<input type="hidden" name="bkThumbImg" value="${books.bkThumbImg}" />
+						</div>
+
+						<script>
+				$("#bkImg").change(function(){
+					if(this.files && this.files[0]){
+						var reader = new FileReader;
+						reader.onload = function(data) {
+						$(".select_img img").attr("src", data.target.result).width(200);
+						}
+					reader.readAsDataURL(this.files[0]);
+					}
+				});
+			</script>
+
+						<%= request.getRealPath("/") %>
+
+					</div>
+
 					<div class="inputArea">
 						<button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
 						<button type="button" id="back_Btn" class="btn btn-warning">취소</button>

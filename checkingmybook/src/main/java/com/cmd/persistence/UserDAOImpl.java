@@ -65,12 +65,11 @@ public class UserDAOImpl implements UserDAO {
 	 
 	 map.put("cateCode", cateCode);
 	 map.put("cateCodeRef", cateCodeRef);
-	 // 2개의 매개변수 받아와 해시맵 이용해 하나로 합쳐 매퍼로 전송
 	 
 	 return sql.selectList(namespace + ".mainlist_1", map);
 	}
 
-	// 카테고리별 상품 리스트 : 2차 분류
+	// 카테고리 중분류
 	@Override
 	public List<BookViewVO> list(int cateCode) throws Exception {
 	 

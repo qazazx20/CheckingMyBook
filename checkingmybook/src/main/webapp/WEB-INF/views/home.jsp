@@ -70,6 +70,11 @@ footer#footer ul li {
 	display: inline-block;
 	margin-right: 10px;
 }
+
+img {
+	opacity: 0.5;
+}
+
 </style>
 </head>
 
@@ -88,7 +93,9 @@ footer#footer ul li {
 		</nav>
 
 		<section id="container">
-			<div id="container_box">로그인 본문</div>
+			<div id="container_box">
+			<center><img src="images/main.jpg"></center>
+			</div>
 		</section>
 	</div>
 	

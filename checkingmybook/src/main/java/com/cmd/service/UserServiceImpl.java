@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
 	// List
 	@Override
 	public List<BookViewVO> booklist() throws Exception {
-		System.out.println("서비스");
 		return dao.booklist();
 	}
 	

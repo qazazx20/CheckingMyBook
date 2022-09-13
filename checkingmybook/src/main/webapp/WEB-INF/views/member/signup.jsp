@@ -116,18 +116,19 @@ footer#footer ul li {
 
 						<div class="input_area">
 							<label for="userPass"><p>Password<p></label> <input type="password"
-								id="userPass" name="userPass" required="required" />
+								id="userPass" name="userPass" placeholder="4자 이상 입력해 주세요"
+								required="required" />
 						</div>
 
 						<div class="input_area">
 							<label for="userName"><p>Name<p></label> <input type="text"
-								id="userName" name="userName" placeholder="닉네임을 입력해주세요"
+								id="userName" name="userName" placeholder="닉네임을 입력해 주세요"
 								required="required" />
 						</div>
 
 						<div class="input_area">
 							<label for="userPhon"><p>Phone Number<p></label> <input type="text"
-								id="userPhon" name="userPhon" placeholder="연락처를 입력해주세요"
+								id="userPhon" name="userPhon" placeholder="연락처를 입력해 주세요"
 								required="required" />
 						</div>
 

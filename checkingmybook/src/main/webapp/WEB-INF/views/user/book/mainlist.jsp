@@ -155,8 +155,7 @@ footer#footer ul li {
 								<div class="bookName">
 									<a href="/user/book/view?n=${list.bkNum}">${list.bkName}</a>
 								</div>
-							</li>
-							
+							</li>		
 						</c:forEach>
 					</ul>
 				</section>
